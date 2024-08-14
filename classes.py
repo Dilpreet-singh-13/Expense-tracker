@@ -33,7 +33,7 @@ class Expense:
                 (user_id_input,)
             )
         except sqlite3.Error as e:
-            print(f"An error occurred: {e}")
+            print(f"\nAn error occurred: {e}")
         else:
             conn.commit()
             return [Expense(user_id_input, *row[1:]) for row in cursor.fetchall()]
@@ -45,10 +45,10 @@ class Expense:
             UPDATE EXPENSES SET amount=(?) WHERE  (user_id=(?) AND amount=(?) AND date=(?))''',
             (amount_new,user_id_input,amount_old,date_input))
         except sqlite3.Error as e:
-            print(f"An error occurred: {e}")
+            print(f"\nAn error occurred: {e}")
         else:
             conn.commit()
-            print(f"Amount updated to: {amount_new}\n")
+            print(f"\nAmount updated to: {amount_new}\n")
     
     @classmethod
     def deleteExpense(cls,user_id,amount_input,date_input,cursor,conn):
@@ -57,10 +57,10 @@ class Expense:
             DELETE FROM EXPENSES WHERE  (user_id=(?) AND amount=(?) AND date=(?))''',
             (user_id,amount_input,date_input))
         except sqlite3.Error as e:
-            print(f"An error occurred: {e}")
+            print(f"\nAn error occurred: {e}")
         else:
             conn.commit()
-            print(f"Successfully deleted record, Amount = {amount_input} on date = {date_input}\n")
+            print(f"\nSuccessfully deleted record, Amount = {amount_input} on date = {date_input}\n")
 
 class Income:
     def __init__(self, userId, amount_input,description_input=None,date_input="None"):
@@ -78,10 +78,10 @@ class Income:
             VALUES (?, ?, ?, ?) ''',
             (user_id_input, amount_input, date_input, description_input))
         except sqlite3.Error as e:
-            print(f"An error occurred: {e}")
+            print(f"\nAn error occurred: {e}")
         else:
             conn.commit()
-            print("Income added successfull.\n")
+            print("\nIncome added successfull.\n")
 
     @classmethod
     def getIncome(cls, user_id_input,cursor,conn):
@@ -91,7 +91,7 @@ class Income:
                 (user_id_input,)
             )
         except sqlite3.Error as e:
-            print(f"An error occurred: {e}")
+            print(f"\nAn error occurred: {e}")
         else:
             conn.commit()
             return [cls(user_id_input, *row[1:]) for row in cursor.fetchall()]
@@ -103,10 +103,10 @@ class Income:
             UPDATE INCOME SET amount=(?) WHERE  (user_id=(?) AND amount=(?) AND date=(?))''',
             (amount_new,user_id_input,amount_old,date_input))
         except sqlite3.Error as e:
-            print(f"An error occurred: {e}")
+            print(f"\nAn error occurred: {e}")
         else:
             conn.commit()
-            print(f"Income updated to: {amount_new}\n")
+            print(f"\nIncome updated to: {amount_new}\n")
     
     @classmethod
     def deleteIncome(cls,user_id_input,amount_input,date_input,cursor,conn):
@@ -115,10 +115,10 @@ class Income:
             DELETE FROM INCOME WHERE  (user_id=(?) AND amount=(?) AND date=(?))''',
             (user_id_input,amount_input,date_input))
         except sqlite3.Error as e:
-            print(f"An error occurred: {e}")
+            print(f"\nAn error occurred: {e}")
         else:
             conn.commit()
-            print(f"Successfully deleted income record, Amount = {amount_input} on date = {date_input}\n")
+            print(f"\nSuccessfully deleted income record, Amount = {amount_input} on date = {date_input}\n")
 
 class User:
     def __init__(self, username_input, password_input):
@@ -138,10 +138,10 @@ class User:
                 INSERT INTO USER (user_id, username, password) VALUES (?,?,?)''',
                 (user_one.user_id, user_one.username, user_one.password))
         except sqlite3.Error as e:
-            print(f"An error occurred: {e}")
+            print(f"\nAn error occurred: {e}")
         else:
             conn.commit()
-            print(f"{user_one.username} successfully created.\n")
+            print(f"\n{user_one.username} successfully created.\n")
 
     @classmethod
     def loginUser(cls,username_input,password_input,cursor):
@@ -151,7 +151,7 @@ class User:
                 (username_input.lower(),))
             password_actual = cursor.fetchone()
         except sqlite3.Error as e:
-            print(f"An error occurred: {e}")
+            print(f"\nAn error occurred: {e}")
         else:
             password_hashed = cls.hash_password(password_input)
             if password_hashed == password_actual[0]:
@@ -161,7 +161,7 @@ class User:
                 userID = cursor.fetchone()
                 return userID[0]
             else:
-                print("Wrong Password.")
+                print("\nWrong Password.")
                 return -1
 
     @classmethod
@@ -187,10 +187,10 @@ class User:
                     DELETE FROM INCOME WHERE user_id=(?)''',
                     (userID[0],))
             else:
-                print("Wrong Password.")
+                print("\nWrong Password.")
                 return -1
         except sqlite3.Error as e:
-            print(f"An error occurred: {e}")
+            print(f"\nAn error occurred: {e}")
         else:
             conn.commit()
-            print(f"User {username_input} deleted successfully.")
+            print(f"\nUser {username_input} deleted successfully.")

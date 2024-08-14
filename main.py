@@ -374,6 +374,7 @@ def main():
         print(f"An error occurred: {e}")
     else:
         if cursor.fetchone()[0] == 0:
+            print("You seem new here. Setup a admin password to start using the expense tracker.")
             password_input = input("Enter new admin password: ")
             password = User.hash_password(password_input)
 
