@@ -21,7 +21,9 @@ An expense tracker that works on the command line with various features and user
    ```
 
 3. Install the required packages:
-   `pip install -r requirements.txt`
+   ```
+   pip install -r requirements.txt
+   ```
 
 ### Running the Application
 
@@ -31,8 +33,8 @@ Run the main script:
 Follow the on-screen prompts to interact with the expense tracker.
 
 ## Features
-- **Multiple users : ** Allows multiple users
-- **Admin access : ** Allows admin to login and use special features
-- **Expense and Income tracking : ** Allows user to create, edit, delete or check expenses AND income
-- **Utility : ** Provides different searching utility like searching between dates
+- **Multiple users :** Allows multiple users
+- **Admin access :** Allows admin to login and use special features
+- **Expense and Income tracking :** Allows user to create, edit, delete or check expenses AND income
+- **Utility :** Provides different searching utility like searching between dates
 - Also user friendly and easy to use
